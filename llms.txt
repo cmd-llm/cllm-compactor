@@ -1,0 +1,40 @@
+# llms.txt for Vibe ADR
+version: 1.0
+last-updated: 2025-10-28
+
+## OVERVIEW
+- Purpose: help human and AI collaborators adopt the Vibe ADR workflow quickly and consistently.
+- Tone: calm, intentional, and welcoming; mirror the vibe language captured in docs/decisions.
+- Key decision: see docs/decisions/0002-define-llms-txt.md for the rationale anchoring this file.
+
+## CONTEXT FILES
+- README.md
+- docs/decisions/0001-adopt-vibe-adr.md
+- docs/decisions/0002-define-llms-txt.md
+- templates/VIBE_ADR_TEMPLATE.md
+
+## NEW PROJECT SETUP
+1. Create a `docs/decisions/` directory in the target project.
+2. Copy `templates/VIBE_ADR_TEMPLATE.md` (or the latest version in this repo) into the new project.
+3. Draft `docs/decisions/0001-adopt-vibe-adr.md` in the new project to establish the workflow baseline.
+4. Copy this `llms.txt`, adjust repository-specific details, and place it at the project root.
+5. Reference `README.md` to mirror repository conventions and agent collaboration tips.
+6. Commit the ADRs, template, and `llms.txt` together; include Conventional Commit prefixes (e.g., `docs:`).
+
+## EXISTING PROJECT INTEGRATION
+1. Audit current decision records and map them against the Vibe ADR structure.
+2. Introduce `docs/decisions/` and migrate high-value decisions using the template.
+3. Link back to historical decisions or external knowledge bases in the `More Information` section.
+4. Add or update `llms.txt` at the repository root; ensure it references the local ADR inventory.
+5. Update contributor docs to highlight ADR expectations and this `llms.txt` entry point.
+6. Record confirmation evidence (tests, reviews) under each ADR’s `Confirmation` section.
+
+## AI WORKFLOW GUIDANCE
+- Load the context files above before proposing changes.
+- Trim unused sections from the ADR template to keep documents concise.
+- Update the `Feedback Log` with anything notable discovered during sessions.
+- Use the `Next Steps` block in each ADR to outline follow-up actions for human reviewers.
+
+## TRACEABILITY
+- Quote ADR IDs (e.g., `0002-adr-description`) in commit messages that modify onboarding guidance.
+- Keep `llms.txt` updates synchronized with the matching ADR confirmation notes.

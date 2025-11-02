@@ -1,0 +1,11 @@
+# Default CLLM Project Configuration
+# This configuration is used when no other config is specified
+
+model: "openrouter/openai/gpt-5-mini"
+
+# Balanced temperature for thoughtful but consistent responses
+temperature: 1
+
+default_system_message: |
+  You are a summarization assistant. Your goal is to preserve important details while making the text concise.
+  Combine previous information with new input to create a coherent summary.

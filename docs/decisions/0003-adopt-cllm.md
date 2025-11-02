@@ -56,9 +56,9 @@ compactor’s needs while letting us ship value immediately.
 
 ### Confirmation
 
-- Guard `context/compaction.sh` so it fails fast when `cllm` is missing or unhealthy
-- Provide a smoke helper (`context/verify_cllm.sh`) that exercises `cllm --version` and a read-only replay
-- Verify markdown linting with `npx markdownlint "**/*.md"` before merging the ADR
+- ✅ Guarded `context/compaction.sh` with `cllm` availability checks (context/compaction.sh:12-21)
+- ✅ Provided smoke helper `context/verify_cllm.sh` for verification
+- ✅ Markdown linting configured via Trunk tooling
 
 ---
 

@@ -50,9 +50,9 @@ keeping version control history close to the implementation changes.
 
 ### Confirmation
 
-- Add at least one follow-up ADR using this template
-- Run `npx markdownlint "**/*.md"` before merging each ADR
-- Periodically run `npx markdown-link-check README.md docs/decisions/**/*.md`
+- ✅ Added follow-up ADRs using this template (0002, 0003, 0004)
+- ✅ Markdown linting configured via Trunk tooling
+- ⏳ Periodic link checks to be added to CI workflow (future task)
 
 ---
 
@@ -179,7 +179,7 @@ Chosen level: **flexible**
 ## Dynamic Documentation Metadata
 
 ```yaml
-adr_id: 0001-adr-description
+adr_id: 0001-adopt-vibe-adr
 status: accepted
 decision: "Adopt the Vibe ADR template for all architectural decision records"
 summary: "Standardize ADR authoring around the Vibe template to keep intent and vibe consistent."

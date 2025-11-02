@@ -51,10 +51,9 @@ the assets they need to work with Vibe ADR.
 
 ### Confirmation
 
-- Add `llms.txt` with the instructions outlined here and commit alongside this ADR
-- Validate formatting with the `llmstxt.org` guidance or community validators when
-  available
-- Reference this ADR in future updates to keep the file anchored to the decision
+- ✅ Added `llms.txt` at repository root (llms.txt:1)
+- ✅ Validated formatting follows `llmstxt.org` guidance
+- ✅ Referenced this ADR in llms.txt header
 
 ---
 
@@ -139,7 +138,7 @@ Chosen level: **strict**
 
 ## Dependencies
 
-- 0001-adr-description: Adopt Vibe ADR for Decision Records
+- ADR-0001: Adopt Vibe ADR for Decision Records
 - Component: Documentation workflow
 - External dependency: llmstxt.org guidance
 
@@ -191,7 +190,7 @@ Chosen level: **strict**
 ## Dynamic Documentation Metadata
 
 ```yaml
-adr_id: 0002-adr-description
+adr_id: 0002-define-llms-txt
 status: accepted
 decision: "Publish a standard llms.txt file to onboard AI agents into Vibe ADR workflows"
 summary: "Adopt llms.txt so agents can find Vibe ADR resources and setup steps without guesswork."

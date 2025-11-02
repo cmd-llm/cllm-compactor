@@ -23,7 +23,7 @@ CLEANUP_CONVERSATION=true
 # ============================================================================
 
 usage() {
-  cat <<EOF
+	cat <<EOF
 cllm-compactor v${VERSION}
 
 Usage:
@@ -77,65 +77,65 @@ EOF
 
 DIRECTORY=""
 PROMPT=""
-RECURSIVE="$DEFAULT_RECURSIVE"
-PATTERN="$DEFAULT_PATTERN"
+RECURSIVE="${DEFAULT_RECURSIVE}"
+PATTERN="${DEFAULT_PATTERN}"
 OUTPUT_FILE=""
 CLLM_PATH=""
 CONVERSATION_ID=""
 VERBOSE=false
 
 while [[ $# -gt 0 ]]; do
-  case $1 in
-    -d|--directory)
-      DIRECTORY="$2"
-      shift 2
-      ;;
-    -p|--prompt)
-      PROMPT="$2"
-      shift 2
-      ;;
-    -r|--recursive)
-      RECURSIVE=true
-      shift
-      ;;
-    --pattern)
-      PATTERN="$2"
-      shift 2
-      ;;
-    -o|--output)
-      OUTPUT_FILE="$2"
-      shift 2
-      ;;
-    --cllm-path)
-      CLLM_PATH="$2"
-      shift 2
-      ;;
-    --conversation-id)
-      CONVERSATION_ID="$2"
-      shift 2
-      ;;
-    --no-cleanup)
-      CLEANUP_CONVERSATION=false
-      shift
-      ;;
-    -v|--verbose)
-      VERBOSE=true
-      shift
-      ;;
-    --version)
-      echo "cllm-compactor v${VERSION}"
-      exit 0
-      ;;
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    *)
-      echo "Error: Unknown option: $1" >&2
-      echo "Try 'cllm-compactor --help' for more information." >&2
-      exit 1
-      ;;
-  esac
+	case $1 in
+	-d | --directory)
+		DIRECTORY="$2"
+		shift 2
+		;;
+	-p | --prompt)
+		PROMPT="$2"
+		shift 2
+		;;
+	-r | --recursive)
+		RECURSIVE=true
+		shift
+		;;
+	--pattern)
+		PATTERN="$2"
+		shift 2
+		;;
+	-o | --output)
+		OUTPUT_FILE="$2"
+		shift 2
+		;;
+	--cllm-path)
+		CLLM_PATH="$2"
+		shift 2
+		;;
+	--conversation-id)
+		CONVERSATION_ID="$2"
+		shift 2
+		;;
+	--no-cleanup)
+		CLEANUP_CONVERSATION=false
+		shift
+		;;
+	-v | --verbose)
+		VERBOSE=true
+		shift
+		;;
+	--version)
+		echo "cllm-compactor v${VERSION}"
+		exit 0
+		;;
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		echo "Error: Unknown option: $1" >&2
+		echo "Try 'cllm-compactor --help' for more information." >&2
+		exit 1
+		;;
+	esac
 done
 
 # ============================================================================
@@ -143,70 +143,70 @@ done
 # ============================================================================
 
 log_verbose() {
-  if [[ "$VERBOSE" == true ]]; then
-    echo "[cllm-compactor] $*" >&2
-  fi
+	if [[ ${VERBOSE} == true ]]; then
+		echo "[cllm-compactor] $*" >&2
+	fi
 }
 
 log_error() {
-  echo "Error: $*" >&2
+	echo "Error: $*" >&2
 }
 
 # Validate required arguments
-if [[ -z "$DIRECTORY" ]]; then
-  log_error "Missing required argument: --directory"
-  echo "Try 'cllm-compactor --help' for more information." >&2
-  exit 1
+if [[ -z ${DIRECTORY} ]]; then
+	log_error "Missing required argument: --directory"
+	echo "Try 'cllm-compactor --help' for more information." >&2
+	exit 1
 fi
 
-if [[ -z "$PROMPT" ]]; then
-  log_error "Missing required argument: --prompt"
-  echo "Try 'cllm-compactor --help' for more information." >&2
-  exit 1
+if [[ -z ${PROMPT} ]]; then
+	log_error "Missing required argument: --prompt"
+	echo "Try 'cllm-compactor --help' for more information." >&2
+	exit 1
 fi
 
 # Validate directory exists
-if [[ ! -d "$DIRECTORY" ]]; then
-  log_error "Directory not found: $DIRECTORY"
-  exit 3
+if [[ ! -d ${DIRECTORY} ]]; then
+	log_error "Directory not found: ${DIRECTORY}"
+	exit 3
 fi
 
 # Validate cllm is available
-if ! command -v "$CLLM_CMD" >/dev/null 2>&1; then
-  log_error "Unable to find the 'cllm' CLI in PATH"
-  echo "Install it with: uv tool install https://github.com/o3-cloud/cllm.git" >&2
-  exit 2
+if ! command -v "${CLLM_CMD}" >/dev/null 2>&1; then
+	log_error "Unable to find the 'cllm' CLI in PATH"
+	echo "Install it with: uv tool install https://github.com/o3-cloud/cllm.git" >&2
+	exit 2
 fi
 
 # Verify cllm works
-if ! "$CLLM_CMD" --version >/dev/null 2>&1; then
-  log_error "'cllm --version' failed; verify your installation"
-  exit 2
+if ! "${CLLM_CMD}" --version >/dev/null 2>&1; then
+	log_error "'cllm --version' failed; verify your installation"
+	exit 2
 fi
 
 # ============================================================================
 # File Discovery
 # ============================================================================
 
-log_verbose "Discovering files in: $DIRECTORY"
-log_verbose "Pattern: $PATTERN, Recursive: $RECURSIVE"
+log_verbose "Discovering files in: ${DIRECTORY}"
+log_verbose "Pattern: ${PATTERN}, Recursive: ${RECURSIVE}"
 
 # Build find command based on recursive flag
 FILES=()
-if [[ "$RECURSIVE" == true ]]; then
-  while IFS= read -r -d '' file; do
-    FILES+=("$file")
-  done < <(find "$DIRECTORY" -type f -name "$PATTERN" -print0 | sort -z)
+if [[ ${RECURSIVE} == true ]]; then
+	while IFS= read -r -d '' file; do
+		FILES+=("${file}")
+	done < <(find "${DIRECTORY}" -type f -name "${PATTERN}" -print0 | sort -z)
 else
-  while IFS= read -r -d '' file; do
-    FILES+=("$file")
-  done < <(find "$DIRECTORY" -maxdepth 1 -type f -name "$PATTERN" -print0 | sort -z)
+	while IFS= read -r -d '' file; do
+		FILES+=("${file}")
+	done < <(find "${DIRECTORY}" -maxdepth 1 -type f -name "${PATTERN}" -print0 | sort -z)
 fi
 
 # Validate we found files
 if [[ ${#FILES[@]} -eq 0 ]]; then
-  log_error "No files matching pattern '$PATTERN' found in $DIRECTORY"
-  exit 3
+	log_error "No files matching pattern '${PATTERN}' found in ${DIRECTORY}"
+	exit 3
 fi
 
 log_verbose "Found ${#FILES[@]} file(s) to process"
@@ -216,17 +216,17 @@ log_verbose "Found ${#FILES[@]} file(s) to process"
 # ============================================================================
 
 # Generate conversation ID if not provided
-if [[ -z "$CONVERSATION_ID" ]]; then
-  CONVERSATION_ID="$(uuidgen)"
-  log_verbose "Generated conversation ID: $CONVERSATION_ID"
+if [[ -z ${CONVERSATION_ID} ]]; then
+	CONVERSATION_ID="$(uuidgen)"
+	log_verbose "Generated conversation ID: ${CONVERSATION_ID}"
 else
-  log_verbose "Using existing conversation ID: $CONVERSATION_ID"
+	log_verbose "Using existing conversation ID: ${CONVERSATION_ID}"
 fi
 
 # Build cllm base arguments
-BASE_ARGS=(--conversation "$CONVERSATION_ID")
-if [[ -n "$CLLM_PATH" ]]; then
-  BASE_ARGS+=(--cllm-path "$CLLM_PATH")
+BASE_ARGS=(--conversation "${CONVERSATION_ID}")
+if [[ -n ${CLLM_PATH} ]]; then
+	BASE_ARGS+=(--cllm-path "${CLLM_PATH}")
 fi
 
 SUMMARY_ARGS=("${BASE_ARGS[@]}" --read-only)
@@ -241,38 +241,38 @@ PROCESSED_COUNT=0
 FAILED_COUNT=0
 
 for file_path in "${FILES[@]}"; do
-  if [[ ! -r "$file_path" ]]; then
-    log_error "Cannot read file: $file_path (skipping)"
-    ((FAILED_COUNT++))
-    continue
-  fi
+	if [[ ! -r ${file_path} ]]; then
+		log_error "Cannot read file: ${file_path} (skipping)"
+		((FAILED_COUNT++))
+		continue
+	fi
 
-  log_verbose "Processing: $file_path"
+	log_verbose "Processing: ${file_path}"
 
-  # Check file size and warn if large
-  file_size=$(stat -f%z "$file_path" 2>/dev/null || stat -c%s "$file_path" 2>/dev/null || echo "0")
-  if [[ "$file_size" -gt 1048576 ]]; then  # 1MB
-    size_mb=$(echo "scale=2; $file_size / 1048576" | bc)
-    log_verbose "Warning: Large file detected (${size_mb}MB): $file_path"
-  fi
+	# Check file size and warn if large
+	file_size=$(stat -f%z "${file_path}" 2>/dev/null || stat -c%s "${file_path}" 2>/dev/null || echo "0")
+	if [[ ${file_size} -gt 1048576 ]]; then # 1MB
+		size_mb=$(echo "scale=2; ${file_size} / 1048576" | bc)
+		log_verbose "Warning: Large file detected (${size_mb}MB): ${file_path}"
+	fi
 
-  # Add file to conversation context
-  if "$CLLM_CMD" "${BASE_ARGS[@]}" < "$file_path" >/dev/null 2>&1; then
-    ((PROCESSED_COUNT++))
-  else
-    log_error "Failed to process file: $file_path (skipping)"
-    ((FAILED_COUNT++))
-  fi
+	# Add file to conversation context
+	if "${CLLM_CMD}" "${BASE_ARGS[@]}" <"${file_path}" >/dev/null 2>&1; then
+		((PROCESSED_COUNT++))
+	else
+		log_error "Failed to process file: ${file_path} (skipping)"
+		((FAILED_COUNT++))
+	fi
 done
 
-log_verbose "Successfully processed $PROCESSED_COUNT file(s)"
-if [[ $FAILED_COUNT -gt 0 ]]; then
-  log_verbose "Warning: Failed to process $FAILED_COUNT file(s)"
+log_verbose "Successfully processed ${PROCESSED_COUNT} file(s)"
+if [[ ${FAILED_COUNT} -gt 0 ]]; then
+	log_verbose "Warning: Failed to process ${FAILED_COUNT} file(s)"
 fi
 
-if [[ $PROCESSED_COUNT -eq 0 ]]; then
-  log_error "No files were successfully processed"
-  exit 3
+if [[ ${PROCESSED_COUNT} -eq 0 ]]; then
+	log_error "No files were successfully processed"
+	exit 3
 fi
 
 # ============================================================================
@@ -282,40 +282,40 @@ fi
 log_verbose "Executing final prompt..."
 
 TEMP_OUTPUT=""
-if [[ -z "$OUTPUT_FILE" ]]; then
-  # Output to stdout
-  if ! printf '%s\n' "$PROMPT" | "$CLLM_CMD" "${SUMMARY_ARGS[@]}"; then
-    log_error "Failed to execute final prompt"
-    exit 4
-  fi
+if [[ -z ${OUTPUT_FILE} ]]; then
+	# Output to stdout
+	if ! printf '%s\n' "${PROMPT}" | "${CLLM_CMD}" "${SUMMARY_ARGS[@]}"; then
+		log_error "Failed to execute final prompt"
+		exit 4
+	fi
 else
-  # Output to file
-  TEMP_OUTPUT=$(mktemp)
-  trap 'rm -f "$TEMP_OUTPUT"' EXIT
+	# Output to file
+	TEMP_OUTPUT=$(mktemp)
+	trap 'rm -f "$TEMP_OUTPUT"' EXIT
 
-  if ! printf '%s\n' "$PROMPT" | "$CLLM_CMD" "${SUMMARY_ARGS[@]}" > "$TEMP_OUTPUT"; then
-    log_error "Failed to execute final prompt"
-    exit 4
-  fi
+	if ! printf '%s\n' "${PROMPT}" | "${CLLM_CMD}" "${SUMMARY_ARGS[@]}" >"${TEMP_OUTPUT}"; then
+		log_error "Failed to execute final prompt"
+		exit 4
+	fi
 
-  # Move to final location
-  if ! mv "$TEMP_OUTPUT" "$OUTPUT_FILE"; then
-    log_error "Failed to write output to: $OUTPUT_FILE"
-    exit 3
-  fi
+	# Move to final location
+	if ! mv "${TEMP_OUTPUT}" "${OUTPUT_FILE}"; then
+		log_error "Failed to write output to: ${OUTPUT_FILE}"
+		exit 3
+	fi
 
-  log_verbose "Output written to: $OUTPUT_FILE"
+	log_verbose "Output written to: ${OUTPUT_FILE}"
 fi
 
 # ============================================================================
 # Cleanup
 # ============================================================================
 
-if [[ "$CLEANUP_CONVERSATION" == true ]]; then
-  log_verbose "Cleaning up conversation: $CONVERSATION_ID"
-  # Note: cllm doesn't have a built-in cleanup command yet
-  # This is a placeholder for future implementation
-  # For now, conversations remain in .cllm/conversations/
+if [[ ${CLEANUP_CONVERSATION} == true ]]; then
+	log_verbose "Cleaning up conversation: ${CONVERSATION_ID}"
+	# Note: cllm doesn't have a built-in cleanup command yet
+	# This is a placeholder for future implementation
+	# For now, conversations remain in .cllm/conversations/
 fi
 
 log_verbose "Compaction completed successfully"

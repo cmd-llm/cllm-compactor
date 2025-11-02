@@ -121,7 +121,7 @@ Chosen level: **flexible**
 - Primary tool: CLLM CLI (via cllm-compactor wrapper)
 - Model/version: Follow project `Cllmfile.yml` defaults
 - Parameters: Compaction-optimized presets (configurable via flags or config files)
-- Context files: README.md, docs/decisions/*.md, implementation files for cllm-compactor
+- Context files: README.md, docs/decisions/\*.md, implementation files for cllm-compactor
 
 ## Test Expectations
 

@@ -116,7 +116,7 @@ Chosen level: **flexible**
   tier via LiteLLM)
 - Parameters: Use compaction presets; adjust temperature or max tokens per run as
   needed
-- Context files: README.md, docs/decisions/*.md, context/compaction/Cllmfile.yml,
+- Context files: README.md, docs/decisions/\*.md, context/compaction/Cllmfile.yml,
   templates/VIBE_ADR_TEMPLATE.md
 
 ## Test Expectations

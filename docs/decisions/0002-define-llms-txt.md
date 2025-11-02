@@ -104,7 +104,7 @@ Chosen level: **strict**
 - Primary tool: GPT-5 Codex CLI
 - Model/version: GPT-5 (Codex CLI harness)
 - Parameters: Default harness settings
-- Context files: README.md, docs/decisions/*.md, llms.txt once created
+- Context files: README.md, docs/decisions/\*.md, llms.txt once created
 
 ## Test Expectations
 

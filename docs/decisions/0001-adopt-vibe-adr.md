@@ -94,7 +94,7 @@ Chosen level: **flexible**
 - Primary tool: GPT-5 Codex CLI
 - Model/version: GPT-5 (Codex CLI harness)
 - Parameters: Default harness settings
-- Context files: README.md, docs/decisions/*.md, templates/VIBE_ADR_TEMPLATE.md
+- Context files: README.md, docs/decisions/\*.md, templates/VIBE_ADR_TEMPLATE.md
 
 ## Test Expectations
 
